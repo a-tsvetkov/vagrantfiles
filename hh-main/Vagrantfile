@@ -1,6 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+require './config.rb'
+
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
@@ -43,9 +45,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # the path on the host to the actual folder. The second argument is
     # the path on the guest to mount the folder. And the optional third
     # argument is a set of non-required options.
-    front.vm.synced_folder "/home/venya-precice/projects/hh.sites.main", "/home/vagrant/projects/hh.sites.main",
+    front.vm.synced_folder CONFIG['hh-sites-main-root'], "/home/vagrant/projects/hh.sites.main",
       owner: "vagrant", group: "vagrant"
-    front.vm.synced_folder "/home/venya-precice/projects/hh.sites.common", "/home/vagrant/projects/hh.sites.common",
+    front.vm.synced_folder CONFIG['hh-sites-common-root'], "/home/vagrant/projects/hh.sites.common",
       owner: "vagrant", group: "vagrant"
 
     front.vm.provision :shell, :path => "front.bootstrap.sh"
@@ -55,7 +57,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     cms.vm.box = "precise32"
     cms.vm.hostname = "hh-cms"
     cms.vm.network :private_network, ip: "192.168.14.12"
-    cms.vm.synced_folder "/home/venya-precice/projects/hh-cms", "/home/vagrant/projects/hh-cms",
+    cms.vm.synced_folder CONFIG['hh-cms-root'], "/home/vagrant/projects/hh-cms",
       owner: "vagrant", group: "vagrant"
 
     cms.vm.provision :shell, :path => "cms.bootstrap.sh"
@@ -65,11 +67,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     stubs.vm.box = "lucid32"
     stubs.vm.hostname = "hh-stubs"
     stubs.vm.network :private_network, ip: "192.168.14.11"
-    stubs.vm.synced_folder "/home/venya-precice/projects/hh-stubs", "/home/vagrant/projects/hh-stubs",
+    stubs.vm.synced_folder CONFIG['hh-stubs-root'], "/home/vagrant/projects/hh-stubs",
       owner: "vagrant", group: "vagrant"
-    stubs.vm.synced_folder "/home/venya-precice/projects/hh-php-app", "/home/vagrant/projects/hh-php-app",
+    stubs.vm.synced_folder CONFIG['hh-php-app-root'], "/home/vagrant/projects/hh-php-app",
       owner: "vagrant", group: "vagrant"
-    stubs.vm.synced_folder "/home/venya-precice/projects/hh-php-packages", "/home/vagrant/projects/hh-php-packages",
+    stubs.vm.synced_folder CONFIG['hh-php-packages-root'], "/home/vagrant/projects/hh-php-packages",
       owner: "vagrant", group: "vagrant"
 
     stubs.vm.provision :shell, :path => "stubs.bootstrap.sh"
