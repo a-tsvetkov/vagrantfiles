@@ -10,7 +10,6 @@ export DEBIAN_FRONTEND=noninteractive
 apt-get update
 apt-get install -y python-software-properties
 
-apt-add-repository
 apt-add-repository ppa:lucid-bleed/ppa
 apt-add-repository ppa:chris-lea/python-pylibmc
 apt-add-repository ppa:chris-lea/libmemcached/

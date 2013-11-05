@@ -1,36 +1,33 @@
-# -*- mode: ruby -*-
+9# -*- mode: ruby -*-
 # vi: set ft=ruby :
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
-  # All Vagrant configuration is done here. The most common configuration
-  # options are documented and commented below. For a complete reference,
-  # please see the online documentation at vagrantup.com.
 
-  # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "lucid32"
-  config.vm.hostname = "hh-db"
   config.ssh.forward_agent = true
 
-  # The url from where the 'config.vm.box' box will be fetched if it
-  # doesn't already exist on the user's system.
-  # config.vm.box_url = "http://domain.com/path/to/above.box"
-
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network :forwarded_port, guest: 80, host: 8080
-
-  # Create a private network, which allows host-only access to the machine
-  # using a specific IP.
-  config.vm.network :private_network, ip: "192.168.14.20"
-  config.vm.provision :shell, :path => "bootstrap.sh"
+  config.vm.define "postgres" do |postgres|
+    # Every Vagrant virtual environment requires a box to build off of.
+    postgres.vm.box = "lucid64"
+    postgres.vm.hostname = "hh-db"
+    postgres.ssh.forward_agent = true
+    postgres.vm.network :private_network, ip: "192.168.14.20"
+    postgres.vm.provision :shell, :path => "bootstrap.sh"
+  end
 
   config.vm.provider "virtualbox" do |v|
     v.name = "hh-db"
   end
+
+  # config.vm.provider :libvirt do |libvirt|
+  #   libvirt.driver = "qemu"
+  #   libvirt.host = nil
+  #   libvirt.connect_via_ssh = false
+  #   libvirt.username = nil
+  #   libvirt.storage_pool_name = "default"
+  # end
 
   # Create a public network, which generally matched to bridged network.
   # Bridged networks make the machine appear as another physical device on

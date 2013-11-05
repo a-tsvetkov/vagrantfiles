@@ -4,7 +4,7 @@ SUPERUSER_PASSWORD=1234
 # Install postgresql database server
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
-apt-get install -y postgresql
+apt-get install -y postgresql memcached
 
 # Update locale settings
 cat /usr/share/i18n/SUPPORTED | grep '\(ru_RU\|en_US\)' > /var/lib/locales/supported.d/local

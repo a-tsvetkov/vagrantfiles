@@ -14,7 +14,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # please see the online documentation at vagrantup.com.
 
     # Every Vagrant virtual environment requires a box to build off of.
-    front.vm.box = "lucid32"
+    front.vm.box = "lucid64"
     front.vm.hostname = "hh-front"
 
     # The url from where the 'config.vm.box' box will be fetched if it
@@ -52,7 +52,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   end
 
   config.vm.define "cms" do |cms|
-    cms.vm.box = "precise32"
+    cms.vm.box = "precise64"
     cms.vm.hostname = "hh-cms"
     cms.vm.network :private_network, ip: "192.168.14.12"
     cms.vm.synced_folder "/home/venya-precice/projects/hh-cms", "/home/vagrant/projects/hh-cms",
@@ -61,8 +61,18 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     cms.vm.provision :shell, :path => "cms.bootstrap.sh"
   end
 
+  config.vm.define "bonus" do |bonus|
+    bonus.vm.box = "lucid64"
+    bonus.vm.hostname = "hh-employer-bonus"
+    bonus.vm.network :private_network, ip: "192.168.14.13"
+    bonus.vm.synced_folder "/home/venya-precice/projects/employer-bonus", "/home/vagrant/projects/employer-bonus",
+      owner: "vagrant", group: "vagrant"
+
+    bonus.vm.provision :shell, :path => "bonus.bootstrap.sh"
+  end
+
   config.vm.define "stubs" do |stubs|
-    stubs.vm.box = "lucid32"
+    stubs.vm.box = "lucid64"
     stubs.vm.hostname = "hh-stubs"
     stubs.vm.network :private_network, ip: "192.168.14.11"
     stubs.vm.synced_folder "/home/venya-precice/projects/hh-stubs", "/home/vagrant/projects/hh-stubs",

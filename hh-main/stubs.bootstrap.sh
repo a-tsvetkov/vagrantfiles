@@ -15,6 +15,7 @@ apt-get update
 apt-get install -y git-core git-buildpackage \
     postgresql-client-8.4 \
     debhelper cdbs \
+    python-lxml \
     nginx apache2 libapache2-mod-wsgi \
     php5-pgsql php5-cli php5-xcache spawn-fcgi php5-curl php5-cgi psmisc
 
@@ -52,8 +53,11 @@ ln -s /etc/nginx/sites-available/stubs.nginx.conf /etc/nginx/sites-enabled/
 psql -d hh < $PROJECTS_FOLDER/hh-php-packages/hh-translation/bootstrap.sql
 psql -d hh < $PROJECTS_FOLDER/hh-php-packages/hh-translation/insert_translations.sql
 
+echo "CREATE INDEX translation_key_idx on translation(key);" | psql -d hh
+
 # Load translations
 gunzip -c /vagrant/trl.sql | psql -d hh
+
 
 # Configure translation service to use our db host
 cat > /etc/hh-php-app/db.hh-translation.conf.php <<EOF
