@@ -19,7 +19,7 @@ apt-get install -y nginx \
     debhelper cdbs \
     git-core git-buildpackage \
     python-pip python-dev \
-    python-setuptools python-pycurl python-lxml python-dateutil \
+    python-setuptools python-pycurl python-lxml python-dateutil python-nose \
     python-simplejson python-daemon python-protobuf python-pylibmc \
     maven2
 

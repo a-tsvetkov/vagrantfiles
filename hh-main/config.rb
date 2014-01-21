@@ -2,10 +2,10 @@
 
 CONFIG = {
 
-    "hh-stubs-root" => "/tmp/hh-stubs",
-    "hh-sites-main-root" => "/tmp/hh-sites-main",
-    "hh-sites-common-root" => "/tmp/hh-sites-common",
-    "hh-cms-root" => "/tmp/hh-cms",
-    "hh-php-app-root" => "/tmp/hh-php-app",
-    "hh-php-packages-root" => "/tmp/hh-php-packages-root",
+    "hh-stubs-root" => "/home/venya-precice/projects/hh-stubs",
+    "hh-sites-main-root" => "/home/venya-precice/projects/hh.sites.main",
+    "hh-sites-common-root" => "/home/venya-precice/projects/hh.sites.common",
+    "hh-cms-root" => "/home/venya-precice/projects/hh-cms",
+    "hh-php-app-root" => "/home/venya-precice/projects/hh-php-app",
+    "hh-php-packages-root" => "/home/venya-precice/projects/hh-php-packages",
 }

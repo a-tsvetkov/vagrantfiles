@@ -38,7 +38,9 @@ apt-get install -y uwsgi-python \
     python-imaging \
     python-nose \
     python-webdav \
-    python-setuptools
+    python-argparse \
+    python-setuptools \
+    python-paste
 
 # Give back project folder permission to our user
 mkdir $PROJECTS_FOLDER
@@ -93,7 +95,10 @@ sed -i "s/\(crm_sync_url\s*=\s*\).*\$/\1'$CRM_HOST\/CrmService'/" /etc/hh-employ
 sed -i "s/\(crm_login_url\s*=\s*\).*\$/\1'$CRM_HOST\/HhidService'/" /etc/hh-employer-bonus/sync.rc
 
 DAV_HOST="http:\/\/192.168.14.1"
-sed -i "s/\(put_uri\s*=\s*\).*\$/\1'$DAV_HOST:8024\/ebonus\/'/" /etc/hh-employer-bonus/webdav.rc
+sed -i "s/\(put_uri\s*=\s*\).*\$/\1'$DAV_HOST:8024\/ebonus'/" /etc/hh-employer-bonus/webdav.rc
 sed -i "s/\(get_uri\s*=\s*\).*\$/\1'$DAV_HOST:8025\/ebonus\/'/" /etc/hh-employer-bonus/webdav.rc
+
+LOG_FILE="\/var\/log\/hh-employer-bonus\/bonus.log"
+sed -i "s/\(dsn\s*=\s*\).*\$/\1'file:\/\/$LOG_FILE'/" /etc/hh-employer-bonus/log.rc
 
 start hh-employer-bonus

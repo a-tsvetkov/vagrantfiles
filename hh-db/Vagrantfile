@@ -13,6 +13,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     postgres.vm.box = "lucid64"
     postgres.vm.hostname = "hh-db"
     postgres.ssh.forward_agent = true
+    postgres.vm.network "forwarded_port", guest: 5432, host: 3333
     postgres.vm.network :private_network, ip: "192.168.14.20"
     postgres.vm.provision :shell, :path => "bootstrap.sh"
   end

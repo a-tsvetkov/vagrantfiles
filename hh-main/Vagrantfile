@@ -63,6 +63,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     cms.vm.provision :shell, :path => "cms.bootstrap.sh"
   end
 
+  config.vm.define "cms2" do |cms2|
+    cms2.vm.box = "precise64"
+    cms2.vm.hostname = "hh-cms2"
+    cms2.vm.network :private_network, ip: "192.168.14.14"
+    cms2.vm.synced_folder CONFIG['hh-cms-root'], "/home/vagrant/projects/hh-cms",
+      owner: "vagrant", group: "vagrant", type: "nfs"
+
+    cms2.vm.provision :shell, :path => "cms2.bootstrap.sh"
+  end
+
   config.vm.define "bonus" do |bonus|
     bonus.vm.box = "lucid64"
     bonus.vm.hostname = "hh-employer-bonus"
